@@ -34,7 +34,7 @@ public class MagpieRenderer extends MobRenderer<MagpieEntity, MagpieRenderState,
         state.bank = entity.getBank(partialTick) * state.flightProgress;
         state.pitchTilt = entity.getPitchTilt(partialTick) * state.flightProgress;
 
-        var cam = net.minecraft.client.Minecraft.getInstance().gameRenderer.getMainCamera();
+        var cam = net.minecraft.client.Minecraft.getInstance().gameRenderer.mainCamera();
         if (cam != null && cam.isInitialized()) {
             net.minecraft.world.phys.Vec3 camPos = cam.position();
             state.distanceToCamera = (float) Math.sqrt(entity.distanceToSqr(camPos.x, camPos.y, camPos.z));

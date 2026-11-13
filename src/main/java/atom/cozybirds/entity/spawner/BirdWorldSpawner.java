@@ -123,7 +123,7 @@ public class BirdWorldSpawner {
 
             BlockPos airPos = groundPos.above();
             BlockState airState = level.getBlockState(airPos);
-            if (!airState.getFluidState().isEmpty() || airState.blocksMotion()) {
+            if (!airState.getFluidState().isEmpty() || airState.isSolid()) {
                 continue;
             }
 
@@ -236,7 +236,7 @@ public class BirdWorldSpawner {
             if (level.structureManager().getStructureWithPieceAt(pos, StructureTags.VILLAGE).isValid()) {
                 return true;
             }
-            if (level.structureManager().hasAnyStructureAt(pos)) {
+            if (!level.structureManager().getAllStructuresAt(pos).isEmpty()) {
                 return true;
             }
         } catch (Exception ignored) {

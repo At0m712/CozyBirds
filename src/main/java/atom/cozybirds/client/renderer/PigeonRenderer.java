@@ -36,7 +36,7 @@ public class PigeonRenderer extends MobRenderer<PigeonEntity, PigeonRenderState,
         state.isCooing = entity.isCooing();
         state.isPreening = entity.isPreening();
 
-        var cam = net.minecraft.client.Minecraft.getInstance().gameRenderer.getMainCamera();
+        var cam = net.minecraft.client.Minecraft.getInstance().gameRenderer.mainCamera();
         if (cam != null && cam.isInitialized()) {
             net.minecraft.world.phys.Vec3 camPos = cam.position();
             state.distanceToCamera = (float) Math.sqrt(entity.distanceToSqr(camPos.x, camPos.y, camPos.z));
