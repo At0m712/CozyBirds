@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "cozybirds:pigeon_feather",
+    "cozybirds:magpie_feather",
+    {
+      "id": "cozybirds:falcon_feather",
+      "required": false
+    },
+    {
+      "id": "cozybirds:flamingo_feather",
+      "required": false
+    },
+    {
+      "id": "cozybirds:golden_eagle_feather",
+      "required": false
+    }
+  ]
+}

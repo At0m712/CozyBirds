@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "minecraft:stick",
+    "F": "#cozybirds:feathers",
+    "Y": "minecraft:flint"
+  },
+  "pattern": [
+    "Y",
+    "#",
+    "F"
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:arrow"
+  }
+}

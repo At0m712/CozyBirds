@@ -1,0 +1,19 @@
+{
+  "entity.cozybirds.pigeon": "Pigeon",
+  "entity.cozybirds.magpie": "Pie",
+  "entity.cozybirds.falcon": "Faucon pèlerin",
+  "entity.cozybirds.flamingo": "Flamant rose",
+  "entity.cozybirds.golden_eagle": "Aigle royal",
+
+  "item.cozybirds.pigeon_feather": "Plume de pigeon",
+  "item.cozybirds.magpie_feather": "Plume de pie",
+  "item.cozybirds.falcon_feather": "Plume de faucon",
+  "item.cozybirds.flamingo_feather": "Plume de flamant rose",
+  "item.cozybirds.golden_eagle_feather": "Plume d'aigle royal",
+
+  "item.cozybirds.pigeon_spawn_egg": "Œuf d'apparition de pigeon",
+  "item.cozybirds.magpie_spawn_egg": "Œuf d'apparition de pie",
+  "item.cozybirds.falcon_spawn_egg": "Œuf d'apparition de faucon pèlerin",
+  "item.cozybirds.flamingo_spawn_egg": "Œuf d'apparition de flamant rose",
+  "item.cozybirds.golden_eagle_spawn_egg": "Œuf d'apparition d'aigle royal"
+}

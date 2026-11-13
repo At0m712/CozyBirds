@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "key": {
+    "#": "#cozybirds:feathers",
+    "I": "minecraft:copper_ingot",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "#",
+    "I",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:brush"
+  }
+}

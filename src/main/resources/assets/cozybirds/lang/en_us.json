@@ -1,0 +1,19 @@
+{
+  "entity.cozybirds.pigeon": "Pigeon",
+  "entity.cozybirds.magpie": "Magpie",
+  "entity.cozybirds.falcon": "Peregrine Falcon",
+  "entity.cozybirds.flamingo": "Greater Flamingo",
+  "entity.cozybirds.golden_eagle": "Golden Eagle",
+
+  "item.cozybirds.pigeon_feather": "Pigeon Feather",
+  "item.cozybirds.magpie_feather": "Magpie Feather",
+  "item.cozybirds.falcon_feather": "Falcon Feather",
+  "item.cozybirds.flamingo_feather": "Flamingo Feather",
+  "item.cozybirds.golden_eagle_feather": "Golden Eagle Feather",
+
+  "item.cozybirds.pigeon_spawn_egg": "Pigeon Spawn Egg",
+  "item.cozybirds.magpie_spawn_egg": "Magpie Spawn Egg",
+  "item.cozybirds.falcon_spawn_egg": "Peregrine Falcon Spawn Egg",
+  "item.cozybirds.flamingo_spawn_egg": "Flamingo Spawn Egg",
+  "item.cozybirds.golden_eagle_spawn_egg": "Golden Eagle Spawn Egg"
+}
