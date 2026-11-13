@@ -34,7 +34,7 @@ public class MagpieRenderer extends MobRenderer<MagpieEntity, MagpieRenderState,
         state.bank = entity.getBank(partialTick) * state.flightProgress;
         state.pitchTilt = entity.getPitchTilt(partialTick) * state.flightProgress;
 
-        var cam = net.minecraft.client.Minecraft.getInstance().gameRenderer.getMainCamera();
+        var cam = net.minecraft.client.Minecraft.getInstance().gameRenderer.mainCamera();
         if (cam != null && cam.isInitialized()) {
             net.minecraft.world.phys.Vec3 camPos = cam.position();
             state.distanceToCamera = (float) Math.sqrt(entity.distanceToSqr(camPos.x, camPos.y, camPos.z));
@@ -59,8 +59,8 @@ public class MagpieRenderer extends MobRenderer<MagpieEntity, MagpieRenderState,
         // 3. Flight banking and pitch orientation in murmuration swoops
         if (state.flightProgress > 0.01F) {
             poseStack.translate(0.0F, 0.85F, 0.0F);
-            poseStack.mulPose(com.mojang.math.Axis.ZP.rotation(state.bank));
-            poseStack.mulPose(com.mojang.math.Axis.XP.rotation(state.pitchTilt));
+            poseStack.rotate(com.mojang.math.Axis.ZP, state.bank);
+            poseStack.rotate(com.mojang.math.Axis.XP, state.pitchTilt);
             poseStack.translate(0.0F, -0.85F, 0.0F);
         }
 
@@ -69,7 +69,7 @@ public class MagpieRenderer extends MobRenderer<MagpieEntity, MagpieRenderState,
     }
 
     @Override
-    public boolean shouldRender(MagpieEntity entity, net.minecraft.client.renderer.culling.Frustum frustum, double camX, double camY, double camZ) {
+    public boolean shouldRender(MagpieEntity entity, net.minecraft.client.renderer.culling.Frustum frustum, double camX, double camY, double camZ, float partialTick) {
         if (!entity.shouldRender(camX, camY, camZ)) {
             return false;
         }

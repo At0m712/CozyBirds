@@ -18,7 +18,6 @@ import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -36,7 +35,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
-public abstract class BirdEntity extends Animal implements FlyingAnimal {
+public abstract class BirdEntity extends Animal {
     private static final EntityDataAccessor<Boolean> DATA_PERCHED =
             SynchedEntityData.defineId(BirdEntity.class, EntityDataSerializers.BOOLEAN);
 
@@ -135,14 +134,14 @@ public abstract class BirdEntity extends Animal implements FlyingAnimal {
     }
 
     public static boolean isBlockEdge(LevelReader level, BlockPos pos, BlockState state) {
-        if (!state.blocksMotion()) {
+        if (!state.isSolid()) {
             return false;
         }
         BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos();
         for (Direction dir : Direction.Plane.HORIZONTAL) {
             mut.set(pos.getX() + dir.getStepX(), pos.getY(), pos.getZ() + dir.getStepZ());
             BlockState neighborState = level.getBlockState(mut);
-            if (neighborState.isAir() || !neighborState.blocksMotion()) {
+            if (neighborState.isAir() || !neighborState.isSolid()) {
                 return true;
             }
         }
@@ -157,7 +156,7 @@ public abstract class BirdEntity extends Animal implements FlyingAnimal {
         BlockState state = level.getBlockState(pos);
         BlockPos above = pos.above();
         BlockState aboveState = level.getBlockState(above);
-        if (!aboveState.isAir() && aboveState.blocksMotion()) {
+        if (!aboveState.isAir() && aboveState.isSolid()) {
             return false;
         }
 
@@ -202,7 +201,6 @@ public abstract class BirdEntity extends Animal implements FlyingAnimal {
         }
     }
 
-    @Override
     public boolean isFlying() {
         return !this.onGround() && !this.isPerched();
     }

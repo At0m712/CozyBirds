@@ -36,7 +36,7 @@ public class PigeonRenderer extends MobRenderer<PigeonEntity, PigeonRenderState,
         state.isCooing = entity.isCooing();
         state.isPreening = entity.isPreening();
 
-        var cam = net.minecraft.client.Minecraft.getInstance().gameRenderer.getMainCamera();
+        var cam = net.minecraft.client.Minecraft.getInstance().gameRenderer.mainCamera();
         if (cam != null && cam.isInitialized()) {
             net.minecraft.world.phys.Vec3 camPos = cam.position();
             state.distanceToCamera = (float) Math.sqrt(entity.distanceToSqr(camPos.x, camPos.y, camPos.z));
@@ -62,8 +62,8 @@ public class PigeonRenderer extends MobRenderer<PigeonEntity, PigeonRenderState,
         if (state.flightProgress > 0.01F) {
             float fp = state.flightProgress;
             poseStack.translate(0.0F, 1.20F, 0.0F);
-            poseStack.mulPose(com.mojang.math.Axis.ZP.rotation(state.bank * fp));
-            poseStack.mulPose(com.mojang.math.Axis.XP.rotation(state.pitchTilt * fp));
+            poseStack.rotate(com.mojang.math.Axis.ZP, state.bank * fp);
+            poseStack.rotate(com.mojang.math.Axis.XP, state.pitchTilt * fp);
             poseStack.translate(0.0F, -1.20F, 0.0F);
         }
 
@@ -72,7 +72,7 @@ public class PigeonRenderer extends MobRenderer<PigeonEntity, PigeonRenderState,
     }
 
     @Override
-    public boolean shouldRender(PigeonEntity entity, net.minecraft.client.renderer.culling.Frustum frustum, double camX, double camY, double camZ) {
+    public boolean shouldRender(PigeonEntity entity, net.minecraft.client.renderer.culling.Frustum frustum, double camX, double camY, double camZ, float partialTick) {
         if (!entity.shouldRender(camX, camY, camZ)) {
             return false;
         }

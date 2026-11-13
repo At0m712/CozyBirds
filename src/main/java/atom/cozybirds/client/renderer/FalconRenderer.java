@@ -34,7 +34,7 @@ public class FalconRenderer extends MobRenderer<PeregrineFalconEntity, FalconRen
         state.bank = entity.getBank(partialTick) * state.flightProgress;
         state.pitchTilt = entity.getPitchTilt(partialTick) * state.flightProgress;
 
-        var cam = net.minecraft.client.Minecraft.getInstance().gameRenderer.getMainCamera();
+        var cam = net.minecraft.client.Minecraft.getInstance().gameRenderer.mainCamera();
         if (cam != null && cam.isInitialized()) {
             net.minecraft.world.phys.Vec3 camPos = cam.position();
             state.distanceToCamera = (float) Math.sqrt(entity.distanceToSqr(camPos.x, camPos.y, camPos.z));
@@ -51,8 +51,8 @@ public class FalconRenderer extends MobRenderer<PeregrineFalconEntity, FalconRen
         }
         if (state.flightProgress > 0.01F) {
             poseStack.translate(0.0F, 1.15F, 0.0F);
-            poseStack.mulPose(com.mojang.math.Axis.ZP.rotation(state.bank));
-            poseStack.mulPose(com.mojang.math.Axis.XP.rotation(state.pitchTilt));
+            poseStack.rotate(com.mojang.math.Axis.ZP, state.bank);
+            poseStack.rotate(com.mojang.math.Axis.XP, state.pitchTilt);
             poseStack.translate(0.0F, -1.15F, 0.0F);
         }
         super.submit(state, poseStack, collector, camera);

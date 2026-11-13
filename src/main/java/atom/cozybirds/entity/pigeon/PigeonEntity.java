@@ -121,13 +121,13 @@ public class PigeonEntity extends BirdEntity {
         double entityBottom = this.getY();
         BlockPos feetPos = BlockPos.containing(this.getX(), entityBottom, this.getZ());
         BlockState feetState = level.getBlockState(feetPos);
-        if (feetState.blocksMotion() || isValidPerch(level, feetPos)) {
+        if (feetState.isSolid() || isValidPerch(level, feetPos)) {
             return true;
         }
 
         BlockPos belowPos = feetPos.below();
         BlockState belowState = level.getBlockState(belowPos);
-        if (belowState.blocksMotion() || isValidPerch(level, belowPos)) {
+        if (belowState.isSolid() || isValidPerch(level, belowPos)) {
             double topY = belowPos.getY() + 1.0;
             if (entityBottom - topY <= 0.40 && entityBottom - topY >= -0.15) {
                 return true;
@@ -422,7 +422,7 @@ public class PigeonEntity extends BirdEntity {
                 if (state.isAir() || !state.getFluidState().isEmpty() || state.is(BlockTags.FIRE)) continue;
 
                 BlockState airState = level.getBlockState(mut.set(x, topY, z));
-                if (!airState.isAir() && airState.blocksMotion()) continue;
+                if (!airState.isAir() && airState.isSolid()) continue;
 
                 this.targetPerchPos = null;
                 return new Vec3(x + 0.5, topY, z + 0.5);
@@ -569,7 +569,7 @@ public class PigeonEntity extends BirdEntity {
                 if (state.isAir() || !state.getFluidState().isEmpty() || state.is(BlockTags.FIRE)) continue;
 
                 BlockState airState = level.getBlockState(mut.set(x, topY, z));
-                if (!airState.isAir() && airState.blocksMotion()) continue;
+                if (!airState.isAir() && airState.isSolid()) continue;
 
                 this.targetPerchPos = null;
                 return new Vec3(x + 0.5, topY, z + 0.5);
@@ -723,7 +723,7 @@ public class PigeonEntity extends BirdEntity {
                     mut.set(currentPos.getX(), currentPos.getY() - dy, currentPos.getZ());
                     if (mut.getY() < level.getMinY()) break;
                     BlockState state = level.getBlockState(mut);
-                    if (state.blocksMotion() || BirdEntity.isValidPerch(level, mut)) {
+                    if (state.isSolid() || BirdEntity.isValidPerch(level, mut)) {
                         targetFloorY = mut.getY() + 1.0;
                         break;
                     }
