@@ -21,8 +21,6 @@ public class PigeonModel extends EntityModel<PigeonRenderState> {
 
     private final ModelPart body;
     private final ModelPart head;
-    private final ModelPart rightWingFolded;
-    private final ModelPart leftWingFolded;
     private final ModelPart rightWingFlying;
     private final ModelPart leftWingFlying;
     private final ModelPart rightLeg;
@@ -33,8 +31,6 @@ public class PigeonModel extends EntityModel<PigeonRenderState> {
         super(root);
         this.body = root.getChild("body");
         this.head = root.getChild("head");
-        this.rightWingFolded = root.getChild("rightWingFolded");
-        this.leftWingFolded = root.getChild("leftWingFolded");
         this.rightWingFlying = root.getChild("rightWingFlying");
         this.leftWingFlying = root.getChild("leftWingFlying");
         this.rightLeg = root.getChild("rightLeg");
@@ -60,20 +56,8 @@ public class PigeonModel extends EntityModel<PigeonRenderState> {
                         .addBox(-2.0F, -4.5F, -18.0F, 4.0F, 4.0F, 8.0F, new CubeDeformation(0.0F)),
                 PartPose.offset(0.0F, 7.0F, -10.0F));
 
-        // 3. Folded Wings: Folded neatly along flanks when on ground
-        partdefinition.addOrReplaceChild("rightWingFolded",
-                CubeListBuilder.create().texOffs(90, 32)
-                        .addBox(-3.0F, 0.0F, -3.0F, 3.0F, 16.0F, 22.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(-9.0F, 7.5F, -4.0F));
-
-        partdefinition.addOrReplaceChild("leftWingFolded",
-                CubeListBuilder.create().texOffs(145, 32)
-                        .addBox(0.0F, 0.0F, -3.0F, 3.0F, 16.0F, 22.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(9.0F, 7.5F, -4.0F));
-
-        // 4. Flying Wings: Wide outstretched wings (40 units span per wing = 98 units wingspan total)
+        // 3. Wings (Single unified pair for flight and folded ground posture)
         // PIVOT POINT: Located EXACTLY at the shoulder-body flank junction (-9.0 and +9.0)
-        // Box starts at X = 0.0F (shoulder), rotating smoothly without ever penetrating the body!
         partdefinition.addOrReplaceChild("rightWingFlying",
                 CubeListBuilder.create().texOffs(0, 85)
                         .addBox(-40.0F, -1.25F, -5.0F, 40.0F, 2.5F, 20.0F, new CubeDeformation(0.0F)),
@@ -193,9 +177,7 @@ public class PigeonModel extends EntityModel<PigeonRenderState> {
         // FLIGHT VS GROUND POSTURE
         boolean flyingState = state.isFlying && !state.isPerched && fp > 0.05F;
         if (flyingState) {
-            // Flight: outstretch wide wings, hide folded wings
-            this.rightWingFolded.visible = false;
-            this.leftWingFolded.visible = false;
+            // Flight: outstretch wide wings
             this.rightWingFlying.visible = true;
             this.leftWingFlying.visible = true;
 
@@ -230,15 +212,15 @@ public class PigeonModel extends EntityModel<PigeonRenderState> {
             this.leftWingFlying.zRot += bank * 0.5F;
         } else {
             // Ground: Folded wings tucked neatly along flanks
-            this.rightWingFolded.visible = true;
-            this.leftWingFolded.visible = true;
-            this.rightWingFlying.visible = false;
-            this.leftWingFlying.visible = false;
+            this.rightWingFlying.visible = true;
+            this.leftWingFlying.visible = true;
 
-            this.rightWingFolded.zRot = 0.0F;
-            this.leftWingFolded.zRot = 0.0F;
-            this.rightWingFolded.xRot = 0.10F;
-            this.leftWingFolded.xRot = 0.10F;
+            this.rightWingFlying.zRot = -1.35F;
+            this.leftWingFlying.zRot = 1.35F;
+            this.rightWingFlying.xRot = 0.15F;
+            this.leftWingFlying.xRot = 0.15F;
+            this.rightWingFlying.yRot = -0.20F;
+            this.leftWingFlying.yRot = 0.20F;
         }
     }
 
@@ -266,6 +248,6 @@ public class PigeonModel extends EntityModel<PigeonRenderState> {
         this.head.yRot += 1.35F;
         this.head.xRot += 0.30F + preenSpeed * 0.10F;
         this.head.z += 1.0F;
-        this.rightWingFolded.zRot += 0.18F;
+        this.rightWingFlying.zRot += 0.18F;
     }
 }
